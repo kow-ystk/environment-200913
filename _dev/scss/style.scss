@@ -1,0 +1,12 @@
+$fontColor: #525252;
+$fontSize: 3.2rem;
+
+html {
+  font-size: 62.5%;
+}
+
+h1 {
+  color: $fontColor;
+  font-size: $fontSize;
+  text-align: center;
+}
