@@ -8,10 +8,10 @@ gulp.task("default", function () {
   // style.scssファイルを取得
   return (
     gulp
-      .src("css/style.scss")
+      .src("_dev/scss/style.scss")
       // Sassのコンパイルを実行
       .pipe(sass())
       // cssフォルダー以下に保存
-      .pipe(gulp.dest("css"))
+      .pipe(gulp.dest("dest/css"))
   );
 });
