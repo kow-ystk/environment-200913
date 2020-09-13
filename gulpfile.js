@@ -1,29 +1,28 @@
-// gulpプラグインの読み込み
-const gulp = require("gulp");
-// Sassをコンパイルするプラグインの読み込み
+// gulpプラグインを読み込みます
+const { src, dest, watch } = require("gulp");
+// Sassをコンパイルするプラグインを読み込みます
 const sass = require("gulp-sass");
 
-// style.scssの監視タスクを作成する
-gulp.task("default", function () {
-  // style.scssファイルを監視
-  return gulp.watch("_dev/scss/style.scss", function () {
-    // style.scssの更新があった場合の処理
+/**
+ * Sassをコンパイルするタスクです
+ */
+const compileSass = () =>
+  // style.scssファイルを取得
+  src("_dev/scss/style.scss")
+    // Sassのコンパイルを実行
+    .pipe(
+      // コンパイル後のCSSを展開
+      sass({
+        outputStyle: "expanded",
+      })
+    )
+    // cssフォルダー以下に保存
+    .pipe(dest("dest/css"));
 
-    // style.scssファイルを取得
-    return (
-      gulp
-        .src("_dev/scss/style.scss")
-        // Sassのコンパイルを実行
-        .pipe(
-          sass({
-            outputStyle: "expanded",
-          })
-            // Sassのコンパイルエラーを表示
-            // (これがないと自動的に止まってしまう)
-            .on("error", sass.logError)
-        )
-        // cssフォルダー以下に保存
-        .pipe(gulp.dest("dest/css"))
-    );
-  });
-});
+/**
+ * Sassファイルを監視し、変更があったらSassを変換します
+ */
+const watchSassFiles = () => watch("_dev/scss/style.scss", compileSass);
+
+// npx gulpというコマンドを実行した時、watchSassFilesが実行されるようにします
+exports.default = watchSassFiles;
