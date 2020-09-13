@@ -38,3 +38,8 @@ Sass ファイルをコンパイルする為のプラグイン gulp-sass
 ```
 npm install -D gulp gulp-sass
 ```
+
+### gulpfile.js を project 直下に新規作成
+
+タスクを作成する  
+Sass のコンパイル処理を記述
